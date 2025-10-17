@@ -1,4 +1,7 @@
-<?php require __DIR__ . '/config_mysqli.php'; require __DIR__ . '/csrf.php'; ?>
+<?php
+require __DIR__ . '/config_mysqli.php';
+require __DIR__ . '/csrf.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,31 +18,44 @@
   <main class="container d-flex justify-content-center">
     <div class="card shadow-sm login-card p-3 p-md-4">
       <div class="card-body">
-        <h1 class="h4 mb-3 text-center">Welcome 👋</h1>
+        <h1 class="h4 mb-3 text-center">Welcome</h1>
 
         <?php if (!empty($_SESSION['flash'])): ?>
-          <div class="alert alert-danger py-2"><?php echo htmlspecialchars($_SESSION['flash']); unset($_SESSION['flash']); ?></div>
+          <div class="alert alert-danger py-2">
+            <?php echo htmlspecialchars($_SESSION['flash']); unset($_SESSION['flash']); ?>
+          </div>
         <?php endif; ?>
 
         <form method="post" action="login_process.php" novalidate>
           <input type="hidden" name="csrf" value="<?php echo htmlspecialchars(csrf_token()); ?>">
+          
           <div class="mb-3">
             <label class="form-label" for="email">Email</label>
             <input class="form-control" type="email" id="email" name="email" placeholder="you@example.com" required>
           </div>
+
           <div class="mb-2">
             <label class="form-label d-flex justify-content-between" for="password">
               <span>Password</span>
-              <a href="#" class="small text-decoration-none" onclick="alert('Ask admin to reset 🙂');return false;">Forgot?</a>
+              <a href="#" class="small text-decoration-none" onclick="alert('Please contact admin to reset your password');return false;">Forgot?</a>
             </label>
-            <input class="form-control" type="password" id="password" name="password" placeholder="••••••••" required>
+            <input class="form-control" type="password" id="password" name="password" placeholder="********" required>
           </div>
+
           <div class="d-grid mt-3">
             <button class="btn btn-primary" type="submit">Sign in</button>
           </div>
         </form>
 
-        <p class="text-center text-muted mt-3 mb-0 small">Demo only — do not use weak passwords.</p>
+
+        <p class="text-center text-muted mt-3 mb-0 small">
+          Don�t have an account? 
+          <a href="register.php" class="text-decoration-none">Create one</a>
+        </p>
+
+        <p class="text-center text-muted mt-3 mb-0 small">
+          Demo only � do not use weak passwords.
+        </p>
       </div>
     </div>
   </main>
